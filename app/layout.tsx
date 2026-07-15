@@ -18,8 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const title = "Metis — Better context. Better code. Finished work.";
-  const description = "An agent layer that helps coding models search, remember, execute, and verify more reliably.";
+  const title = "Metis — Better context. Finished work. | 更好上下文，完成工作";
+  const description = "An agent layer that helps coding models search, remember, execute, and verify more reliably. 帮助编程模型更可靠地搜索、记忆、执行与验证。";
 
   return {
     title,

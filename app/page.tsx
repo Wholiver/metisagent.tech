@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { LanguageSwitcher, useLanguage } from "./language-switcher";
 
 const installCommands = {
   npm: "npm i -g @wholiver_hu/metis@rc",
@@ -113,7 +114,115 @@ const terminalScenes: TerminalScene[] = [
   },
 ];
 
-const chapters = [
+const homeCopy = {
+  en: {
+    homeLabel: "Metis home",
+    navigationLabel: "Primary navigation",
+    navWhy: "Why",
+    navHow: "How it works",
+    navPrinciples: "Principles",
+    navDocs: "Docs",
+    heroEyebrow: "terminal-first coding agent",
+    heroLine: "Your model knows how to code.",
+    heroEmphasis: "Metis helps it finish.",
+    heroCopy: "Better context, reusable experience, and verified results around the model you already use.",
+    installLabel: "Install Metis",
+    packageManagerLabel: "Package manager",
+    copyCommand: "Copy install command",
+    copied: "Copied",
+    copy: "Copy",
+    scrollCue: "see the system around the model",
+    whyIndex: "01 / WHY METIS",
+    thesisOverline: "Same underlying model.",
+    thesisLine: "A better way to",
+    thesisEmphasis: "search, remember, work, and check.",
+    thesisCopy: "Metis does not replace the model or change its weights. It strengthens the system around it—so the model begins with better evidence, preserves useful experience, and finishes with proof.",
+    live: "LIVE",
+    terminalCaption: "scroll-driven Metis session",
+    terminalDemo: "Metis terminal demo",
+    demoScene: "Demo scene",
+    of: "of",
+    viewChapter: "View chapter",
+    proofIndex: "02 / PRACTICAL OUTCOME",
+    proofTitle: "Less time in one same-task user comparison.",
+    baseline: "Baseline",
+    proofNote: "One user test, not a universal benchmark. Results vary by task, model, tools, and environment.",
+    principlesIndex: "03 / DESIGN PRINCIPLES",
+    principlesLine: "Reliable by habit,",
+    principlesEmphasis: "not by hope.",
+    principlesCopy: "Metis makes disciplined agent behavior part of the harness.",
+    principles: [
+      ["⌕", "No action before search", "Investigate code and constraints before making changes."],
+      ["◇", "No context left to chance", "Load instructions, skills, and relevant experience up front."],
+      ["↻", "No lesson learned twice", "Carry durable technical knowledge into later sessions."],
+      ["≋", "No long task without state", "Append-only logs preserve decisions, errors, and next steps."],
+      ["✓", "No “done” without proof", "Build, test, inspect, and check every requirement."],
+      ["⌁", "No single interface lock-in", "TUI, Print/JSON, RPC, and SDK use the same agent layer."],
+    ],
+    ctaEyebrow: "open source · MIT licensed",
+    ctaLine: "Give your model",
+    ctaEmphasis: "a better way to work.",
+    githubCta: "View on GitHub ↗",
+    footerCopy: "Better context. Reusable experience. Verified results.",
+    footerLabel: "Footer links",
+    footerCredit: "MIT License · Built by Wholiver",
+  },
+  zh: {
+    homeLabel: "Metis 首页",
+    navigationLabel: "主导航",
+    navWhy: "为何选择",
+    navHow: "工作方式",
+    navPrinciples: "设计原则",
+    navDocs: "文档",
+    heroEyebrow: "终端优先的编程 Agent",
+    heroLine: "你的模型会写代码。",
+    heroEmphasis: "Metis 帮它完成工作。",
+    heroCopy: "为你已经在用的模型补上更好的上下文、可复用的经验，以及经过验证的结果。",
+    installLabel: "安装 Metis",
+    packageManagerLabel: "包管理器",
+    copyCommand: "复制安装命令",
+    copied: "已复制",
+    copy: "复制",
+    scrollCue: "看看模型周围的系统",
+    whyIndex: "01 / 为何选择 METIS",
+    thesisOverline: "相同的底层模型。",
+    thesisLine: "用更好的方式",
+    thesisEmphasis: "搜索、记忆、工作与检查。",
+    thesisCopy: "Metis 不会替换模型，也不会改变模型权重。它强化模型周围的系统，让模型从更好的证据出发，保留有用经验，并用验证结果完成工作。",
+    live: "实时",
+    terminalCaption: "滚动驱动的 Metis 会话",
+    terminalDemo: "Metis 终端演示",
+    demoScene: "演示场景",
+    of: "/",
+    viewChapter: "查看章节",
+    proofIndex: "02 / 实际结果",
+    proofTitle: "在一次相同任务的用户对比中，用时减少。",
+    baseline: "基准",
+    proofNote: "这是一次用户测试，并非通用基准。结果会随任务、模型、工具和环境而变化。",
+    principlesIndex: "03 / 设计原则",
+    principlesLine: "可靠源于习惯，",
+    principlesEmphasis: "而不是期待。",
+    principlesCopy: "Metis 把严谨的 Agent 行为纳入运行框架。",
+    principles: [
+      ["⌕", "行动前必须搜索", "改动前先调查代码与约束。"],
+      ["◇", "上下文不靠运气", "预先加载指令、技能与相关经验。"],
+      ["↻", "经验不重复学习", "把耐久的技术知识带入后续会话。"],
+      ["≋", "长任务必须保留状态", "追加式日志保存决策、错误与下一步。"],
+      ["✓", "没有证据，不算完成", "构建、测试、检查，并核对每项要求。"],
+      ["⌁", "不绑定单一界面", "TUI、Print/JSON、RPC 与 SDK 共用同一 Agent 层。"],
+    ],
+    ctaEyebrow: "开源 · MIT 许可",
+    ctaLine: "让你的模型",
+    ctaEmphasis: "用更好的方式工作。",
+    githubCta: "前往 GitHub ↗",
+    footerCopy: "更好的上下文。可复用的经验。经过验证的结果。",
+    footerLabel: "页脚链接",
+    footerCredit: "MIT 许可 · Wholiver 构建",
+  },
+} as const;
+
+const chaptersByLanguage = {
+  en: [
   {
     number: "01",
     kicker: "CONTEXT BEFORE CODE",
@@ -156,13 +265,58 @@ const chapters = [
     copy: "Work in the interactive TUI, compose Metis in scripts with Print or JSON, integrate over RPC, or embed it with the Node.js SDK.",
     note: "TUI · Print/JSON · RPC · SDK",
   },
-] as const;
+  ],
+  zh: [
+    {
+      number: "01",
+      kicker: "代码之前，先有上下文",
+      title: "给模型正确的起点。",
+      copy: "Metis 会在实质工作开始前加载项目指令、相关技能与既有技术知识。更好的上下文会改变之后每个决策的质量。",
+      note: "AGENTS.md · 技能 · brain map",
+    },
+    {
+      number: "02",
+      kicker: "行动之前，先搜索",
+      title: "先理解代码库，再动手。",
+      copy: "Metis 会在编辑前追踪现有代码、测试、归属与约束，从而减少无依据的假设，让改动更小、兼容性更强。",
+      note: "代码库搜索 · 权威来源",
+    },
+    {
+      number: "03",
+      kicker: "记忆与经验",
+      title: "经验会跨会话累积。",
+      copy: "有用的决策与来之不易的技术经验，会在会话结束后继续保留。下一项任务从证据出发，而不是重新摸索。",
+      note: "可复用知识 · 加权召回",
+    },
+    {
+      number: "04",
+      kicker: "DREAM",
+      title: "已完成的工作成为耐久知识。",
+      copy: "Dream 审阅完整工作历史，过滤常规噪声，只把真正可复用的洞见提升为结构化记忆与经验。",
+      note: "整理 · 连接 · 清理",
+    },
+    {
+      number: "05",
+      kicker: "经过验证的完成",
+      title: "“完成”是一种有证据的状态。",
+      copy: "Metis 会执行构建、测试、检查输出，并在报告完成前逐项核对最初要求。",
+      note: "构建 · 测试 · 检查 · 核对",
+    },
+    {
+      number: "06",
+      kicker: "统一的 AGENT 层",
+      title: "终端优先，但不只限于终端。",
+      copy: "可在交互式 TUI 中工作，通过 Print 或 JSON 编排脚本，经 RPC 集成，或使用 Node.js SDK 嵌入 Metis。",
+      note: "TUI · Print/JSON · RPC · SDK",
+    },
+  ],
+} as const;
 
-function MetisTerminal({ sceneIndex }: { sceneIndex: number }) {
+function MetisTerminal({ sceneIndex, label }: { sceneIndex: number; label: string }) {
   const scene = terminalScenes[sceneIndex];
 
   return (
-    <div className="tui-frame" aria-live="polite" aria-label={`Metis terminal demo: ${scene.label}`}>
+    <div className="tui-frame" aria-live="polite" aria-label={`${label}: ${scene.label}`}>
       <div className="tui-screen">
         <div className="tui-session-label"><span>metis</span><small>{scene.label}</small></div>
         <div className="tui-scene" key={sceneIndex}>
@@ -184,6 +338,9 @@ function MetisTerminal({ sceneIndex }: { sceneIndex: number }) {
 }
 
 export default function Home() {
+  const { language, setLanguage } = useLanguage();
+  const copy = homeCopy[language];
+  const chapters = chaptersByLanguage[language];
   const [manager, setManager] = useState<PackageManager>("npm");
   const [copied, setCopied] = useState(false);
   const [activeScene, setActiveScene] = useState(0);
@@ -213,19 +370,22 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Metis home">
+        <a className="brand" href="#top" aria-label={copy.homeLabel}>
           <Image src="/metis-mark.svg" alt="" width={30} height={30} priority />
           <span>metis</span>
         </a>
-        <nav className="nav-links" aria-label="Primary navigation">
-          <a href="#why">Why</a>
-          <a href="#story">How it works</a>
-          <a href="#principles">Principles</a>
-          <a href="/docs">Docs</a>
+        <nav className="nav-links" aria-label={copy.navigationLabel}>
+          <a href="#why">{copy.navWhy}</a>
+          <a href="#story">{copy.navHow}</a>
+          <a href="#principles">{copy.navPrinciples}</a>
+          <a href="/docs">{copy.navDocs}</a>
         </nav>
-        <a className="github-link" href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">
-          GitHub <span aria-hidden="true">↗</span>
-        </a>
+        <div className="header-actions">
+          <LanguageSwitcher language={language} onChange={setLanguage} />
+          <a className="github-link" href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </header>
 
       <section className="hero graph-paper" id="top">
@@ -234,17 +394,17 @@ export default function Home() {
         <div className="hero-mark" aria-hidden="true">
           <Image src="/metis-mark.svg" alt="" width={90} height={90} priority />
         </div>
-        <p className="eyebrow"><span /> terminal-first coding agent</p>
+        <p className="eyebrow"><span /> {copy.heroEyebrow}</p>
         <h1>
-          Your model knows how to code.
-          <em>Metis helps it finish.</em>
+          {copy.heroLine}
+          <em>{copy.heroEmphasis}</em>
         </h1>
         <p className="hero-copy">
-          Better context, reusable experience, and verified results around the model you already use.
+          {copy.heroCopy}
         </p>
 
-        <div className="install-shell" aria-label="Install Metis">
-          <div className="manager-tabs" role="tablist" aria-label="Package manager">
+        <div className="install-shell" aria-label={copy.installLabel}>
+          <div className="manager-tabs" role="tablist" aria-label={copy.packageManagerLabel}>
             {(Object.keys(installCommands) as PackageManager[]).map((item) => (
               <button
                 key={item}
@@ -260,38 +420,36 @@ export default function Home() {
           <div className="install-command">
             <span aria-hidden="true">$</span>
             <code>{installCommands[manager]}</code>
-            <button type="button" onClick={copyInstall} aria-label="Copy install command">
-              {copied ? "Copied" : "Copy"}
+            <button type="button" onClick={copyInstall} aria-label={copy.copyCommand}>
+              {copied ? copy.copied : copy.copy}
             </button>
           </div>
         </div>
 
-        <a className="scroll-cue" href="#why"><span>↓</span> see the system around the model</a>
+        <a className="scroll-cue" href="#why"><span>↓</span> {copy.scrollCue}</a>
       </section>
 
       <section className="thesis" id="why">
-        <div className="section-index">01 / WHY METIS</div>
+        <div className="section-index">{copy.whyIndex}</div>
         <div>
-          <p className="thesis-overline">Same underlying model.</p>
-          <h2>A better way to<br /><em>search, remember, work, and check.</em></h2>
+          <p className="thesis-overline">{copy.thesisOverline}</p>
+          <h2>{copy.thesisLine}<br /><em>{copy.thesisEmphasis}</em></h2>
         </div>
-        <p>
-          Metis does not replace the model or change its weights. It strengthens the system around it—so the model begins with better evidence, preserves useful experience, and finishes with proof.
-        </p>
+        <p>{copy.thesisCopy}</p>
       </section>
 
       <section className="story" id="story">
         <div className="story-terminal">
           <div className="terminal-sticky">
-            <p className="terminal-caption"><span>LIVE</span> scroll-driven Metis session</p>
-            <MetisTerminal sceneIndex={activeScene} />
-            <div className="scene-progress" aria-label={`Demo scene ${activeScene + 1} of ${chapters.length}`}>
+            <p className="terminal-caption"><span>{copy.live}</span> {copy.terminalCaption}</p>
+            <MetisTerminal sceneIndex={activeScene} label={copy.terminalDemo} />
+            <div className="scene-progress" aria-label={`${copy.demoScene} ${activeScene + 1} ${copy.of} ${chapters.length}`}>
               {chapters.map((chapter, index) => (
                 <button
                   key={chapter.number}
                   className={activeScene === index ? "active" : ""}
                   onClick={() => chapterRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" })}
-                  aria-label={`View chapter ${chapter.number}`}
+                  aria-label={`${copy.viewChapter} ${chapter.number}`}
                 />
               ))}
             </div>
@@ -317,31 +475,28 @@ export default function Home() {
       </section>
 
       <section className="proof graph-paper">
-        <div className="section-index">02 / PRACTICAL OUTCOME</div>
+        <div className="section-index">{copy.proofIndex}</div>
         <div className="proof-number">57<sup>%</sup></div>
         <div className="proof-copy">
-          <h2>Less time in one same-task user comparison.</h2>
+          <h2>{copy.proofTitle}</h2>
           <div className="comparison">
             <div><span>Metis</span><i className="metis-bar">1m 30s</i></div>
-            <div><span>Baseline</span><i className="base-bar">3m 30s</i></div>
+            <div><span>{copy.baseline}</span><i className="base-bar">3m 30s</i></div>
           </div>
-          <small>One user test, not a universal benchmark. Results vary by task, model, tools, and environment.</small>
+          <small>{copy.proofNote}</small>
         </div>
       </section>
 
       <section className="principles" id="principles">
         <div className="principles-heading">
-          <div className="section-index">03 / DESIGN PRINCIPLES</div>
-          <h2>Reliable by habit,<br /><em>not by hope.</em></h2>
-          <p>Metis makes disciplined agent behavior part of the harness.</p>
+          <div className="section-index">{copy.principlesIndex}</div>
+          <h2>{copy.principlesLine}<br /><em>{copy.principlesEmphasis}</em></h2>
+          <p>{copy.principlesCopy}</p>
         </div>
         <div className="principle-grid">
-          <article><span>⌕</span><h3>No action before search</h3><p>Investigate code and constraints before making changes.</p></article>
-          <article><span>◇</span><h3>No context left to chance</h3><p>Load instructions, skills, and relevant experience up front.</p></article>
-          <article><span>↻</span><h3>No lesson learned twice</h3><p>Carry durable technical knowledge into later sessions.</p></article>
-          <article><span>≋</span><h3>No long task without state</h3><p>Append-only logs preserve decisions, errors, and next steps.</p></article>
-          <article><span>✓</span><h3>No “done” without proof</h3><p>Build, test, inspect, and check every requirement.</p></article>
-          <article><span>⌁</span><h3>No single interface lock-in</h3><p>TUI, Print/JSON, RPC, and SDK use the same agent layer.</p></article>
+          {copy.principles.map(([icon, title, description]) => (
+            <article key={title}><span>{icon}</span><h3>{title}</h3><p>{description}</p></article>
+          ))}
         </div>
       </section>
 
@@ -349,11 +504,11 @@ export default function Home() {
         <div className="hero-mark cta-mark" aria-hidden="true">
           <Image src="/metis-mark.svg" alt="" width={76} height={76} />
         </div>
-        <p className="eyebrow"><span /> open source · MIT licensed</p>
-        <h2>Give your model<br /><em>a better way to work.</em></h2>
+        <p className="eyebrow"><span /> {copy.ctaEyebrow}</p>
+        <h2>{copy.ctaLine}<br /><em>{copy.ctaEmphasis}</em></h2>
         <div className="cta-actions">
           <button type="button" onClick={copyInstall}>$ {installCommands[manager]}</button>
-          <a href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">View on GitHub ↗</a>
+          <a href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">{copy.githubCta}</a>
         </div>
       </section>
 
@@ -362,13 +517,13 @@ export default function Home() {
           <Image src="/metis-mark.svg" alt="" width={26} height={26} />
           <span>metis</span>
         </a>
-        <p>Better context. Reusable experience. Verified results.</p>
-        <nav aria-label="Footer links">
+        <p>{copy.footerCopy}</p>
+        <nav aria-label={copy.footerLabel}>
           <a href="https://www.npmjs.com/package/@wholiver_hu/metis" target="_blank" rel="noreferrer">npm</a>
-          <a href="/docs">Docs</a>
+          <a href="/docs">{copy.navDocs}</a>
           <a href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
-        <small>MIT License · Built by Wholiver</small>
+        <small>{copy.footerCredit}</small>
       </footer>
     </main>
   );
