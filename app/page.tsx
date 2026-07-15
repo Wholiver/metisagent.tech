@@ -221,7 +221,7 @@ export default function Home() {
           <a href="#why">Why</a>
           <a href="#story">How it works</a>
           <a href="#principles">Principles</a>
-          <a href="https://github.com/Wholiver/metis/tree/main/docs" target="_blank" rel="noreferrer">Docs</a>
+          <a href="/docs">Docs</a>
         </nav>
         <a className="github-link" href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">
           GitHub <span aria-hidden="true">↗</span>
@@ -365,7 +365,7 @@ export default function Home() {
         <p>Better context. Reusable experience. Verified results.</p>
         <nav aria-label="Footer links">
           <a href="https://www.npmjs.com/package/@wholiver_hu/metis" target="_blank" rel="noreferrer">npm</a>
-          <a href="https://github.com/Wholiver/metis/tree/main/docs" target="_blank" rel="noreferrer">Docs</a>
+          <a href="/docs">Docs</a>
           <a href="https://github.com/Wholiver/metis" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
         <small>MIT License · Built by Wholiver</small>
