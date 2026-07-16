@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
   const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
   const origin = `${protocol}://${host}`;
-  const title = "Metis — Better context. Finished work. | 让编程模型把事情做完";
+  const title = "Metis — Better context. Finished work. | 让编程模型可靠完成任务";
   const description = "An agent layer that helps coding models search, remember, execute, and verify more reliably. 通过更完整的上下文、可复用经验和结果验证，让编程模型写得更好、完成得更快。";
 
   return {
