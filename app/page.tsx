@@ -396,7 +396,7 @@ export default function Home() {
         </div>
         <p className="eyebrow"><span /> {copy.heroEyebrow}</p>
         <h1>
-          {copy.heroLine}
+          <span>{copy.heroLine}</span>
           <em>{copy.heroEmphasis}</em>
         </h1>
         <p className="hero-copy">
