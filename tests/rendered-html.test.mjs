@@ -29,7 +29,7 @@ test("server-renders the bilingual Metis home page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Metis[^<]*更好上下文，完成工作<\/title>/);
+  assert.match(html, /<title>Metis[^<]*让编程模型把事情做完<\/title>/);
   assert.match(html, /Your model knows how to code/);
   assert.match(html, /Metis helps it finish/);
   assert.match(html, /aria-label="Choose site language"/);
@@ -63,7 +63,7 @@ test("keeps language preference shared across home and docs", async () => {
   assert.match(switcher, /navigator\.language/);
   assert.match(switcher, /localStorage\.setItem/);
   assert.match(switcher, /document\.documentElement\.lang/);
-  assert.match(home, /你的模型会写代码/);
+  assert.match(home, /Metis 让它把事情做完/);
   assert.match(home, /LanguageSwitcher/);
   assert.match(docs, /Metis 文档/);
   assert.match(docs, /LanguageSwitcher/);
