@@ -3,32 +3,12 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(pathname = "/") {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request(`http://localhost${pathname}`, {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+  const outputPath = pathname === "/" ? "../out/index.html" : `../out${pathname}/index.html`;
+  return readFile(new URL(outputPath, import.meta.url), "utf8");
 }
 
-test("server-renders the bilingual Metis home page", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
+test("exports the bilingual Metis home page", async () => {
+  const html = await render();
   assert.match(html, /<title>Metis[^<]*让编程模型可靠完成任务<\/title>/);
   assert.match(html, /Your model knows how to code/);
   assert.match(html, /Metis helps it finish/);
@@ -39,11 +19,8 @@ test("server-renders the bilingual Metis home page", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
-test("server-renders the bilingual documentation hub", async () => {
-  const response = await render("/docs");
-  assert.equal(response.status, 200);
-
-  const html = await response.text();
+test("exports the bilingual documentation hub", async () => {
+  const html = await render("/docs");
   assert.match(html, /<title>Metis Documentation \| Metis 文档<\/title>/);
   assert.match(html, /Metis Documentation/);
   assert.match(html, /npm i -g @wholiver_hu\/metis@rc/);
