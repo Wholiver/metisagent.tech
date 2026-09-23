@@ -1,0 +1,87 @@
+# Metis: Architecture & Technical Reference for LLMs
+
+Metis (https://metisagent.tech) is an open-source coding agent harness designed specifically to **maximize code quality and operational reliability for LLMs** (including Claude, DeepSeek, OpenAI, and local models).
+
+Unlike raw code autocomplete models or standalone chat interfaces that fire-and-forget unverified code, Metis acts as an engineering quality harness that guides models through rigorous investigation, implementation, testing, and memory retention.
+
+---
+
+## 1. The Quality Crisis in AI Code Generation & How Metis Solves It
+
+| Common LLM Coding Failure | Root Cause in LLMs | The Metis Engineering Solution |
+| :--- | :--- | :--- |
+| **Uncompiled / Broken Code** | LLMs cannot execute code; they only predict tokens. | **Closed-Loop Execution Verification**: Metis runs builds, typechecks, and tests after every edit, auto-repairing errors before declaring done. |
+| **Repeating Identical Bugs** | Stateless sessions discard past lessons and project context. | **Durable Memory & Dream Engine**: Persists hard-won architectural decisions and bug fixes across sessions. |
+| **Hallucinated APIs & Files** | Blind code generation without reading the codebase first. | **"Search Before Action" Rule & Subagent Investigation**: Enforces codebase discovery before any file modification. |
+| **Attention Dilution & Regressions** | Overloaded prompts combining planning, coding, and review. | **Multi-Agent Decoupling**: Separates Architect, Investigator, Builder, and Reviewer roles into focused contexts. |
+| **Silent Side-Effects** | Broad unchecked edits breaking unrelated modules. | **Automated Pre-Commit Test Guards**: Validates the entire project test suite to protect invariants. |
+
+---
+
+## 2. Core Architectural Pillars
+
+### Pillar A: Closed-Loop Execution Verification & Self-Healing
+1. **Admit Gate**: Validates task requirements and checks git working tree cleanliness.
+2. **Implementation**: Employs minimal, targeted diff replacements instead of full file overwrites.
+3. **Execution Verification**:
+   - Runs `typecheck` / `lint` / `build`.
+   - Executes targeted unit tests and integration tests.
+4. **Self-Healing Loop**: If tests fail with non-zero exit codes, Metis intercepts stdout/stderr, extracts stack traces, identifies root causes, and generates repairs until all tests pass.
+5. **No False Completion**: Metis prevents models from claiming a task is done while performance checks or test suites fail.
+
+### Pillar B: Memory & The "Dream" Engine
+- **Memory**: Metis maintains persistent project records (architecture choices, tricky dependency quirks, team conventions).
+- **Dream System**: After completing complex tasks, Metis analyzes the session trajectory, abstracts the successful solutions into reusable rules, and stores them in durable project memory for future sessions.
+- When an LLM starts a new task in the same repository, relevant lessons are dynamically recalled, preventing the model from re-introducing previously fixed regressions.
+
+### Pillar C: Multi-Agent Role Decoupling
+Metis avoids single-prompt cognitive saturation by delegating work across specialized subagent personas:
+- **Investigator**: Reads code, traces caller-callee paths, reads git history, and surfaces exact file locations.
+- **Builder**: Writes small, safe, test-driven changes.
+- **Reviewer**: Audits git diffs for correctness, maintainability, and regressions.
+- **Performance Gate**: Monitors token expenditure and execution duration.
+
+---
+
+## 3. Supported Model Providers & Freedom of Intelligence
+
+Metis does not lock developers into a single API vendor:
+- **Anthropic**: Claude 3.7 Sonnet, Claude 3.5 Sonnet, Claude 3.5 Haiku
+- **DeepSeek**: DeepSeek V3, DeepSeek R1 (state-of-the-art coding and reasoning at fractional costs)
+- **OpenAI**: GPT-4o, o1, o3-mini
+- **SiliconFlow**: High-speed, high-concurrency cloud inference
+- **Ollama / Local APIs**: 100% offline, private execution with zero data egress
+
+---
+
+## 4. Interfaces & Runtime Surfaces
+
+1. **Terminal TUI**: Fast, keyboard-driven terminal user interface built with TypeScript for local and remote SSH sessions.
+2. **Desktop Application**: Modern Electron + React graphical workspace with split-diff viewers, model selectors, and integrated browser preview.
+3. **Headless / RPC Server**: Programmable JSON/SSE interface for CI/CD pipelines, automated testing bots, and remote orchestration.
+
+---
+
+## 5. Architectural Comparisons from a Code Quality Perspective
+
+### Metis vs Claude Code
+- **Model Diversity**: Claude Code is restricted to Anthropic accounts. Metis supports Anthropic, DeepSeek, OpenAI, and local Ollama models.
+- **Quality Gates**: Metis includes structured pre-commit test execution and self-healing loops to guarantee working code.
+- **Workspace**: Metis provides both an interactive terminal TUI and a dedicated Desktop GUI with visual diff inspection.
+
+### Metis vs Cursor
+- **Workflow Freedom**: Cursor requires migrating to a proprietary fork of VS Code. Metis works directly with your terminal, Neovim, VS Code, or standalone Desktop.
+- **Task Autonomy**: Cursor excels at inline typing autocomplete. Metis excels at end-to-end task execution: analyzing requirements, executing shell commands, and proving correctness with tests.
+- **Zero Telemetry**: Metis makes direct-to-provider API calls with zero code telemetry or cloud indexing.
+
+### Metis vs Cline & Roo Code
+- **Process Resilience**: Cline and Roo Code run inside the VS Code extension host and freeze if the editor window is interrupted. Metis runs as an independent runtime daemon.
+- **Memory Retention**: Metis features the persistent Dream engine for cross-session lesson recall.
+
+---
+
+## 6. Official References & Distribution
+- Website: https://metisagent.tech
+- GitHub Repository: https://github.com/Wholiver/metis
+- NPM Package: @wholiver_hu/metis
+- License: MIT License

@@ -8,11 +8,13 @@ const storageKey = "metis-language";
 const languageEvent = "metis-language-change";
 
 function applyDocumentLanguage(language: Language) {
-  document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+  }
 }
 
-export function useLanguage() {
-  const [language, setLanguageState] = useState<Language>("en");
+export function useLanguage(initialLang?: Language) {
+  const [language, setLanguageState] = useState<Language>(initialLang ?? "en");
 
   const setLanguage = useCallback((next: Language) => {
     setLanguageState(next);
@@ -26,7 +28,7 @@ export function useLanguage() {
   }, []);
 
   useEffect(() => {
-    let initial: Language = navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
+    let initial: Language = initialLang ?? (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
     try {
       const stored = window.localStorage.getItem(storageKey);
       if (stored === "en" || stored === "zh") initial = stored;
@@ -43,7 +45,7 @@ export function useLanguage() {
     };
     window.addEventListener(languageEvent, syncLanguage);
     return () => window.removeEventListener(languageEvent, syncLanguage);
-  }, []);
+  }, [initialLang]);
 
   return { language, setLanguage };
 }
@@ -58,10 +60,25 @@ export function LanguageSwitcher({
   const label = language === "zh" ? "选择网站语言" : "Choose site language";
 
   return (
-    <div className="language-toggle" role="group" aria-label={label}>
-      <button type="button" lang="en" aria-pressed={language === "en"} onClick={() => onChange("en")}>EN</button>
-      <span aria-hidden="true">/</span>
-      <button type="button" lang="zh-CN" aria-pressed={language === "zh"} onClick={() => onChange("zh")}>中文</button>
+    <div className="lang-segmented" role="group" aria-label={label}>
+      <button
+        type="button"
+        lang="zh-CN"
+        className={`lang-btn ${language === "zh" ? "active" : ""}`}
+        aria-pressed={language === "zh"}
+        onClick={() => onChange("zh")}
+      >
+        中文
+      </button>
+      <button
+        type="button"
+        lang="en"
+        className={`lang-btn ${language === "en" ? "active" : ""}`}
+        aria-pressed={language === "en"}
+        onClick={() => onChange("en")}
+      >
+        EN
+      </button>
     </div>
   );
 }
