@@ -237,6 +237,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://github.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://github.com" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/metis-mark.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

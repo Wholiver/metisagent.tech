@@ -44,7 +44,7 @@ export default function CompareHubPage() {
       <header className="compare-header">
         <Link className="compare-brand" href="/">
           <Image
-            src="/metis-readme-icon.png"
+            src="/metis-mark.svg"
             alt="Metis"
             width={26}
             height={26}

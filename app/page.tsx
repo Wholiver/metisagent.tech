@@ -164,7 +164,7 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
         <div className="header-left">
           <Link className="brand" href="/" aria-label={copy.homeLabel}>
             <Image
-              src="/metis-readme-icon.png"
+              src="/metis-mark.svg"
               alt="Metis Logo"
               width={26}
               height={26}
@@ -217,7 +217,7 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
         <div className="hero-content">
           <div className="brand-mark-wrapper" aria-hidden="true">
             <Image
-              src="/metis-readme-icon.png"
+              src="/metis-mark.svg"
               alt="Metis Icon"
               width={96}
               height={96}

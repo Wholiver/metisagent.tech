@@ -13,9 +13,9 @@ async function readStatic(relativePath) {
 
 test("exports the bilingual Metis home page with deep SEO", async () => {
   const html = await render();
-  assert.match(html, /<title>Metis[^<]*让编程模型可靠完成任务/);
-  assert.match(html, /Your model knows how to code/);
-  assert.match(html, /Metis helps it finish/);
+  assert.match(html, /<title>Metis[^<]*Maximize LLM Coding Performance/);
+  assert.match(html, /Elevate your model's coding performance/);
+  assert.match(html, /Turn LLM generation into reliable engineering/);
   assert.match(html, /aria-label="Choose site language"/);
   assert.match(html, />EN<\/button>/);
   assert.match(html, />中文<\/button>/);
@@ -32,9 +32,8 @@ test("exports the bilingual Metis home page with deep SEO", async () => {
 test("exports the Chinese dedicated home page", async () => {
   const html = await render("/zh");
   assert.match(html, /Metis/);
-  assert.match(html, /全球领先的 Coding Harness 架构/);
-  assert.match(html, /会写代码，只是开始/);
-  assert.match(html, /可靠完成，才是结果/);
+  assert.match(html, /全面提升大模型编程性能/);
+  assert.match(html, /让 AI 代码从生成走向自主交付/);
 });
 
 test("exports the competitor comparison hub", async () => {
