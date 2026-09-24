@@ -3,9 +3,9 @@ import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metisagent.tech";
 
-const title = "Metis — Open-Source Coding Agent & Harness | 让编程模型可靠完成任务";
+const title = "Metis — Maximize LLM Coding Performance | Open-Source Autonomous Coding Harness";
 const description =
-  "Metis is the open-source, terminal-first & desktop coding agent harness. Features context compaction, test-driven verification, and multi-provider LLM support. 通过更完整的上下文、可复用经验和自动化结果验证，让编程模型写得更好、完成得更快。";
+  "Metis is the open-source coding agent harness engineered to elevate LLM coding performance to production grade. Features closed-loop test verification, automated self-healing, cross-session persistent memory, and multi-provider model routing for Claude, DeepSeek, and OpenAI.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,21 +18,22 @@ export const metadata: Metadata = {
     "Metis",
     "Metis Agent",
     "metisagent.tech",
+    "LLM coding performance",
+    "maximize LLM performance",
     "AI coding agent",
-    "coding agent",
-    "AI agent for developers",
-    "autonomous coding agent",
-    "terminal coding agent",
     "coding harness",
+    "autonomous coding agent",
+    "coding agent harness",
     "Claude Code alternative",
     "Cursor alternative",
     "Cline alternative",
     "Aider alternative",
     "Codex CLI alternative",
     "open source coding agent",
-    "context compaction",
-    "execution verification",
-    "AI 编程助手",
+    "closed-loop test verification",
+    "self-healing code",
+    "AI agent for developers",
+    "提升大模型编程性能",
     "开源 AI Agent",
     "终端编程智能体",
   ],
@@ -48,10 +49,20 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/metis-mark.svg",
-    shortcut: "/metis-mark.svg",
-    apple: "/metis-readme-icon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/metis-mark.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "icon", type: "image/png", sizes: "192x192", url: "/icon-192.png" },
+      { rel: "icon", type: "image/png", sizes: "512x512", url: "/icon-512.png" },
+    ],
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     title,
     description,
@@ -65,7 +76,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1536,
         height: 1024,
-        alt: "Metis - Open-Source Coding Agent Harness",
+        alt: "Metis — Maximize LLM Coding Performance",
       },
     ],
   },
@@ -104,7 +115,7 @@ const jsonLd = {
         priceCurrency: "USD",
       },
       description:
-        "The open-source terminal-first coding agent harness that helps AI coding models search, remember, execute, and verify reliably.",
+        "The open-source autonomous coding agent harness engineered to elevate LLM coding performance with closed-loop verification, automated self-healing, and persistent memory.",
       softwareVersion: "1.3.2",
       license: "https://opensource.org/licenses/MIT",
       downloadUrl: "https://github.com/Wholiver/metis/releases",
@@ -117,6 +128,7 @@ const jsonLd = {
         worstRating: "1",
       },
       featureList: [
+        "Elevates LLM coding performance to production-grade reliability",
         "Closed-loop test execution and automated self-healing",
         "Cross-session persistent memory and lesson distillation",
         "Hierarchical multi-agent team delegation (Architect, Builder, Reviewer)",
@@ -190,10 +202,10 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "What is Metis and how does it elevate LLM coding quality?",
+          name: "What is Metis and how does it elevate LLM coding performance?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Metis is an open-source coding agent harness that wraps around your AI models. Unlike chatbots that output unverified code, Metis enforces a closed-loop verification cycle: running tests, catching errors, self-healing syntax bugs, and retaining cross-session architectural memory.",
+            text: "Metis is an open-source coding agent harness that wraps around your AI models. Unlike chatbots that output unverified code, Metis elevates model performance through a closed-loop verification cycle: running tests, catching errors, self-healing syntax bugs, and retaining cross-session architectural memory.",
           },
         },
         {
@@ -225,6 +237,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/metis-mark.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

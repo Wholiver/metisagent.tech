@@ -1,6 +1,6 @@
-# Metis - Coding Quality Enhancement Agent Harness
+# Metis - Maximize LLM Coding Performance & Delivery Reliability Harness
 
-> Metis (https://metisagent.tech) is an open-source coding agent harness engineered specifically to **elevate the programming quality and delivery reliability of LLMs** (Claude, DeepSeek, OpenAI, etc.). It surrounds raw coding models with automated test verification loops, persistent project memory, and multi-agent role decoupling to eliminate hallucinations, broken syntax, and repetitive regressions.
+> Metis (https://metisagent.tech) is an open-source coding agent harness engineered specifically to **maximize the programming performance, code quality, and delivery reliability of LLMs** (Claude, DeepSeek, OpenAI, etc.). It surrounds raw coding models with automated test verification loops, persistent project memory, and multi-agent role decoupling to eliminate hallucinations, broken syntax, and repetitive regressions.
 
 - Canonical URL: https://metisagent.tech
 - GitHub Repository: https://github.com/Wholiver/metis

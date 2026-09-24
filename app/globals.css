@@ -252,7 +252,9 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 8px;
+  width: 100%;
 }
 
 .slogan-primary {
@@ -262,6 +264,7 @@ a {
   letter-spacing: -0.03em;
   color: var(--ink);
   line-height: 1.25;
+  text-align: center;
 }
 
 .slogan-primary em {
@@ -278,7 +281,8 @@ html[lang="zh-CN"] .slogan-primary {
   font-size: clamp(13px, 1.3vw, 16px);
   color: var(--muted);
   line-height: 1.5;
-  max-width: 580px;
+  text-align: center;
+  width: 100%;
 }
 
 /* Action Row (Buttons) */

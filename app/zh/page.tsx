@@ -2,23 +2,25 @@ import type { Metadata } from "next";
 import { HomeView } from "../page";
 
 export const metadata: Metadata = {
-  title: "Metis — 全球领先的 Coding Harness 架构 | 开源 AI 编程助手",
+  title: "Metis — 全面提升大模型编程性能 | 开源全自主 Coding Agent Harness",
   description:
-    "Metis 是一款开源、终端优先与桌面端全能的 Coding Agent Harness。通过更完整的上下文、可复用经验和自动化结果验证，让编程模型写得更好、完成得更快。",
+    "Metis 专为全面提升大模型编程性能打造。通过自动化测试闭环、语法与逻辑异常自愈、跨会话经验记忆以及多智能体协同，消除大模型代码幻觉，让 Claude、DeepSeek、GPT 等模型从代码生成跃升至高可靠软件工程交付。",
   keywords: [
+    "提升大模型编程性能",
+    "大模型编程能力",
     "Metis",
     "Metis Agent",
     "AI 编程助手",
     "Coding Agent",
+    "Coding Harness",
     "开源 AI Agent",
     "终端编程智能体",
-    "代码大模型 Harness",
+    "代码自愈与闭环验证",
     "Claude Code 替代品",
     "Cursor 替代品",
     "Cline 对比",
     "Aider 替代品",
-    "自动化代码验证",
-    "上下文压缩与精简",
+    "DeepSeek 编程 Harness",
     "自主编程智能体",
   ],
   alternates: {
@@ -30,12 +32,20 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Metis — 全球领先的 Coding Harness 架构 | 开源 AI 编程助手",
+    title: "Metis — 全面提升大模型编程性能 | 开源全自主 Coding Agent Harness",
     description:
-      "Metis 是一款开源、终端优先与桌面端全能的 Coding Agent Harness。通过更完整的上下文、可复用经验和自动化结果验证，让编程模型写得更好、完成得更快。",
+      "专为全面提升大模型编程性能打造的开源自主 Coding Agent Harness。闭环测试验证、异常自动自愈、消除代码幻觉，让 AI 真正可靠交付。",
     url: "https://metisagent.tech/zh",
     locale: "zh_CN",
     alternateLocale: ["en_US"],
+    images: [
+      {
+        url: "/og.png",
+        width: 1536,
+        height: 1024,
+        alt: "Metis — 全面提升大模型编程性能",
+      },
+    ],
   },
 };
 
