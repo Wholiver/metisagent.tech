@@ -1,6 +1,6 @@
 # Metis: Architecture & Technical Reference for LLMs
 
-Metis (https://metisagent.tech) is an open-source coding agent harness designed specifically to **maximize code quality and operational reliability for LLMs** (including Claude, DeepSeek, OpenAI, and local models).
+> Metis (https://metisagent.tech) is an open-source coding agent harness designed specifically to maximize code quality, programming performance, and operational reliability for LLMs (including Claude, DeepSeek, OpenAI, and local models).
 
 Unlike raw code autocomplete models or standalone chat interfaces that fire-and-forget unverified code, Metis acts as an engineering quality harness that guides models through rigorous investigation, implementation, testing, and memory retention.
 
@@ -81,7 +81,9 @@ Metis does not lock developers into a single API vendor:
 ---
 
 ## 6. Official References & Distribution
-- Website: https://metisagent.tech
-- GitHub Repository: https://github.com/Wholiver/metis
-- NPM Package: @wholiver_hu/metis
-- License: MIT License
+- [Official Website](https://metisagent.tech): Home of Metis coding agent harness.
+- [Documentation](https://metisagent.tech/docs): Guides, CLI configuration, and desktop manual.
+- [Competitor Comparisons](https://metisagent.tech/compare): In-depth comparison matrix against Claude Code, Cursor, Cline, etc.
+- [GitHub Repository](https://github.com/Wholiver/metis): Open-source repository, issues, and releases.
+- [NPM Package](https://www.npmjs.com/package/@wholiver_hu/metis): Terminal CLI package.
+- [License (MIT)](https://opensource.org/licenses/MIT): Permissive open-source license.
