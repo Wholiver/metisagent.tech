@@ -14,6 +14,8 @@ pnpm build
 - Build output directory: `out`
 - Production branch: `main`
 
-`wrangler.toml` declares the Pages output directory so Git deployments use the repository configuration.
+## Documentation & Design Guidelines
+
+- 📘 [网站架构与 SEO 设计全景指南 (SEO_AND_STRUCTURE.md)](./SEO_AND_STRUCTURE.md)：包含网站整体路由表、TDK 与 Schema.org 规范、Lighthouse 性能优化措施、Cloudflare 边缘防火墙与防阻挡规则、以及标准发布工作流。
 
 The original vinext Worker build remains available as `pnpm run build:worker`.
