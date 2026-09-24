@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { MetisMascot } from "./metis-mascot";
 import { Language, LanguageSwitcher, useLanguage } from "./language-switcher";
 
 const VERSION = "1.3.2";
@@ -163,14 +163,7 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
       <header className="minimal-header">
         <div className="header-left">
           <Link className="brand" href="/" aria-label={copy.homeLabel}>
-            <Image
-              src="/metis-mark.svg"
-              alt="Metis Logo"
-              width={26}
-              height={26}
-              priority
-              style={{ borderRadius: 6 }}
-            />
+            <MetisMascot size={26} style={{ borderRadius: 6 }} priority />
             <span className="brand-name">metis</span>
           </Link>
           <a
@@ -216,13 +209,10 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
       <main className="hero-center" id="top">
         <div className="hero-content">
           <div className="brand-mark-wrapper" aria-hidden="true">
-            <Image
-              src="/metis-mark.svg"
-              alt="Metis Icon"
-              width={96}
-              height={96}
-              priority
+            <MetisMascot
+              size={96}
               style={{ borderRadius: 20, boxShadow: "0 8px 24px rgba(0,0,0,0.06)" }}
+              priority
             />
           </div>
 

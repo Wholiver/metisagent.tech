@@ -27,12 +27,12 @@
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Static images and icons: 1 day with 7 day stale-while-revalidate
+# Static images and icons
 /*.png
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 /*.svg
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=0, must-revalidate
 
 # SEO & AI Crawlers Discovery Files
 /robots.txt

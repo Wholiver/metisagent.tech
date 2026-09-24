@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { MetisMascot } from "../metis-mascot";
 import { Language, LanguageSwitcher, useLanguage } from "../language-switcher";
 
 type LocalizedText = Record<Language, string>;
@@ -174,7 +174,7 @@ export default function DocsPage() {
     <main className="docs-page">
       <header className="docs-header">
         <a className="docs-brand" href="/" aria-label={copy.homeLabel}>
-          <Image src="/metis-mark.svg" alt="" width={28} height={28} priority />
+          <MetisMascot size={28} style={{ borderRadius: 6 }} priority />
           <span>metis</span><small>docs</small>
         </a>
         <nav aria-label={copy.navLabel}>

@@ -50,16 +50,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/metis-mark.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=2", sizes: "32x32" },
+      { url: "/metis-cloud-mascot.svg?v=2", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/favicon.ico?v=2",
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
     ],
     other: [
-      { rel: "icon", type: "image/png", sizes: "192x192", url: "/icon-192.png" },
-      { rel: "icon", type: "image/png", sizes: "512x512", url: "/icon-512.png" },
+      { rel: "icon", type: "image/png", sizes: "192x192", url: "/icon-192.png?v=2" },
+      { rel: "icon", type: "image/png", sizes: "512x512", url: "/icon-512.png?v=2" },
     ],
   },
   manifest: "/site.webmanifest",
@@ -239,9 +239,9 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://github.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://github.com" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/metis-mark.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" href="/metis-cloud-mascot.svg?v=2" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"

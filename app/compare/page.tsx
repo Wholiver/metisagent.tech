@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import { MetisMascot } from "../metis-mascot";
 import "./compare.css";
 import { comparisons } from "./data";
 
@@ -43,13 +43,7 @@ export default function CompareHubPage() {
       {/* Header */}
       <header className="compare-header">
         <Link className="compare-brand" href="/">
-          <Image
-            src="/metis-mark.svg"
-            alt="Metis"
-            width={26}
-            height={26}
-            style={{ borderRadius: 6 }}
-          />
+          <MetisMascot size={26} style={{ borderRadius: 6 }} priority />
           <span>metis</span>
         </Link>
         <nav className="compare-nav">

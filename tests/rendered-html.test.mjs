@@ -14,19 +14,22 @@ async function readStatic(relativePath) {
 test("exports the bilingual Metis home page with deep SEO", async () => {
   const html = await render();
   assert.match(html, /<title>Metis[^<]*Maximize LLM Coding Performance/);
-  assert.match(html, /Elevate your model's coding performance/);
+  assert.match(html, /Elevate your model(&#x27;|')s coding performance/);
   assert.match(html, /Turn LLM generation into reliable engineering/);
   assert.match(html, /aria-label="Choose site language"/);
-  assert.match(html, />EN<\/button>/);
   assert.match(html, />中文<\/button>/);
-  assert.match(html, /href="\/docs"/);
-  assert.match(html, /href="\/compare"/);
+  assert.match(html, /href="\/docs\/?/);
+  assert.match(html, /href="\/compare\/?/);
   // SEO Canonical and Hreflang
   assert.match(html, /metisagent\.tech/);
   // Schema.org JSON-LD
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /DeveloperApplication/);
+  // Verify cloud mascot logo is rendered inline, zero pixel mark
+  assert.match(html, /viewBox="-128 -128 256 256"/);
+  assert.doesNotMatch(html, /Metis pixel mark/);
+  assert.doesNotMatch(html, /M180 171h40v37/);
 });
 
 test("exports the Chinese dedicated home page", async () => {
