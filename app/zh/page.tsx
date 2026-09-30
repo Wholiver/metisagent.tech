@@ -2,26 +2,24 @@ import type { Metadata } from "next";
 import { HomeView } from "../page";
 
 export const metadata: Metadata = {
-  title: "Metis — 全面提升大模型编程性能 | 开源全自主 Coding Agent Harness",
+  title: "Metis — 同模型可验证拉高 Coding Agent 表现 | 开源终端优先智能体",
   description:
-    "Metis 专为全面提升大模型编程性能打造。通过自动化测试闭环、语法与逻辑异常自愈、跨会话经验记忆以及多智能体协同，消除大模型代码幻觉，让 Claude、DeepSeek、GPT 等模型从代码生成跃升至高可靠软件工程交付。",
+    "Metis 是开源 coding agent harness，同模型下可验证拉高表现。Terminal-Bench 同模约 82%（vs OpenCode ~67%）。多模型支持，终端优先设计，适合从 Claude Code / OpenCode 切换的用户。",
   keywords: [
-    "提升大模型编程性能",
-    "大模型编程能力",
+    "coding agent 同模表现",
+    "harness 可验证提升",
     "Metis",
     "Metis Agent",
-    "AI 编程助手",
-    "Coding Agent",
-    "Coding Harness",
-    "开源 AI Agent",
     "终端编程智能体",
-    "代码自愈与闭环验证",
+    "开源 AI Agent",
     "Claude Code 替代品",
-    "Cursor 替代品",
-    "Cline 对比",
-    "Aider 替代品",
-    "DeepSeek 编程 Harness",
+    "OpenCode 替代品",
+    "多模型 coding agent",
+    "Terminal-Bench",
+    "Coding Harness",
     "自主编程智能体",
+    "DeepSeek 编程 Harness",
+    "Aider 替代品",
   ],
   alternates: {
     canonical: "/zh",
@@ -32,9 +30,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Metis — 全面提升大模型编程性能 | 开源全自主 Coding Agent Harness",
+    title: "Metis — 同模型可验证拉高 Coding Agent 表现 | 开源终端优先智能体",
     description:
-      "专为全面提升大模型编程性能打造的开源自主 Coding Agent Harness。闭环测试验证、异常自动自愈、消除代码幻觉，让 AI 真正可靠交付。",
+      "同模型下，harness 可验证拉高 coding agent 表现。Terminal-Bench 同模约 82%（vs OpenCode ~67%）。MIT · 多模型 · 终端/桌面。",
     url: "https://metisagent.tech/zh",
     locale: "zh_CN",
     alternateLocale: ["en_US"],
@@ -43,7 +41,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1536,
         height: 1024,
-        alt: "Metis — 全面提升大模型编程性能",
+        alt: "Metis — 同模型可验证拉高 Coding Agent 表现",
       },
     ],
   },

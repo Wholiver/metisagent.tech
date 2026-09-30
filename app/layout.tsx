@@ -4,9 +4,9 @@ import { VERSION } from "./release";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metisagent.tech";
 
-const title = "Metis — Maximize LLM Coding Performance | Open-Source Autonomous Coding Harness";
+const title = "Metis — Same Model, Verified Harness Lift | Open-Source Coding Agent";
 const description =
-  "Metis is the open-source coding agent harness engineered to elevate LLM coding performance to production grade. Features closed-loop test verification, automated self-healing, cross-session persistent memory, and multi-provider model routing for Claude, DeepSeek, and OpenAI.";
+  "Metis is an open-source coding agent harness with verified same-model performance lift. Terminal-Bench ~82% vs OpenCode ~67%. Multi-model support, terminal-first design for Claude Code and OpenCode switchers.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -19,24 +19,23 @@ export const metadata: Metadata = {
     "Metis",
     "Metis Agent",
     "metisagent.tech",
-    "LLM coding performance",
-    "maximize LLM performance",
-    "AI coding agent",
-    "coding harness",
-    "autonomous coding agent",
     "coding agent harness",
-    "Claude Code alternative",
-    "Cursor alternative",
-    "Cline alternative",
-    "Aider alternative",
-    "Codex CLI alternative",
+    "verified harness lift",
+    "same model performance",
+    "terminal coding agent",
     "open source coding agent",
+    "Claude Code alternative",
+    "OpenCode alternative",
+    "multi-model coding agent",
+    "Terminal-Bench",
+    "autonomous coding agent",
+    "AI coding agent",
+    "Aider alternative",
     "closed-loop test verification",
     "self-healing code",
-    "AI agent for developers",
-    "提升大模型编程性能",
-    "开源 AI Agent",
     "终端编程智能体",
+    "开源 AI Agent",
+    "coding agent 同模表现",
   ],
   authors: [{ name: "Wholiver", url: "https://github.com/Wholiver" }],
   creator: "Wholiver",
@@ -77,7 +76,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1536,
         height: 1024,
-        alt: "Metis — Maximize LLM Coding Performance",
+        alt: "Metis — Same Model, Verified Harness Lift",
       },
     ],
   },
@@ -116,7 +115,7 @@ const jsonLd = {
         priceCurrency: "USD",
       },
       description:
-        "The open-source autonomous coding agent harness engineered to elevate LLM coding performance with closed-loop verification, automated self-healing, and persistent memory.",
+        "Open-source coding agent harness with verified same-model performance lift. Terminal-Bench ~82% vs OpenCode ~67%. Multi-model, terminal-first design.",
       softwareVersion: VERSION,
       license: "https://opensource.org/licenses/MIT",
       downloadUrl: "https://github.com/Wholiver/metis/releases",
@@ -129,13 +128,13 @@ const jsonLd = {
         worstRating: "1",
       },
       featureList: [
-        "Elevates LLM coding performance to production-grade reliability",
+        "Verified same-model harness lift: Terminal-Bench ~82% vs OpenCode ~67%",
+        "Multi-model support: Claude, DeepSeek, OpenAI, Ollama",
+        "Terminal-first design for Claude Code and OpenCode switchers",
+        "Dual interface: Terminal TUI + Desktop GUI",
         "Closed-loop test execution and automated self-healing",
-        "Cross-session persistent memory and lesson distillation",
-        "Hierarchical multi-agent team delegation (Architect, Builder, Reviewer)",
-        "Multi-provider freedom: Claude 3.7 Sonnet, DeepSeek V3/R1, OpenAI, Ollama",
-        "Dual interface: Terminal TUI + Electron Desktop diff review workspace",
-        "Local offline model support with 100% private execution",
+        "Cross-session persistent memory",
+        "MIT licensed, 100% open source",
       ],
       sameAs: [
         "https://github.com/Wholiver/metis",
@@ -148,7 +147,7 @@ const jsonLd = {
       url: SITE_URL,
       name: "Metis Agent",
       description:
-        "The world-leading coding harness architecture for autonomous AI agents and developers.",
+        "Open-source coding agent with verified same-model harness lift. Terminal-first design for developers switching from Claude Code or OpenCode.",
       publisher: {
         "@id": `${SITE_URL}/#organization`,
       },
@@ -175,7 +174,7 @@ const jsonLd = {
       "@id": `${SITE_URL}/#howto`,
       name: "How to Install and Run Metis AI Coding Agent in 30 Seconds",
       description:
-        "Get started with Metis to elevate your AI model's programming quality and verify code automatically.",
+        "Get started with Metis, the open-source coding agent with verified same-model harness lift.",
       step: [
         {
           "@type": "HowToStep",
@@ -203,26 +202,26 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "What is Metis and how does it elevate LLM coding performance?",
+          name: "What is Metis and what is verified harness lift?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Metis is an open-source coding agent harness that wraps around your AI models. Unlike chatbots that output unverified code, Metis elevates model performance through a closed-loop verification cycle: running tests, catching errors, self-healing syntax bugs, and retaining cross-session architectural memory.",
+            text: "Metis is an open-source coding agent harness with verified same-model performance lift. On Terminal-Bench, Metis achieves ~82% with the same model where OpenCode scores ~67%. The harness wraps around your chosen model with closed-loop verification, test execution, and self-healing.",
           },
         },
         {
           "@type": "Question",
-          name: "Is Metis a free and open-source alternative to Claude Code and Cursor?",
+          name: "Why switch from Claude Code or OpenCode to Metis?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. Metis is 100% open-source under the MIT license. You can connect your own API keys (Anthropic, DeepSeek, OpenAI) or run completely offline with local models (Ollama) with zero subscription fees.",
+            text: "Switching from Claude Code: same capability with more freedom — not locked to one vendor, MIT licensed, multi-model support. Switching from OpenCode: verified same-model harness lift means measurably better results, not just 'good enough'.",
           },
         },
         {
           "@type": "Question",
-          name: "Which operating systems and models are supported by Metis?",
+          name: "Which models and platforms does Metis support?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Metis runs natively on macOS (Apple Silicon and Intel), Windows (native executable and WSL), and Linux. Supported models include Claude 3.7 Sonnet, DeepSeek V3/R1, GPT-4o, o3-mini, and any local GGUF model via Ollama.",
+            text: "Metis supports multiple model providers: Claude, DeepSeek, OpenAI, Ollama. Runs on macOS (Apple Silicon & Intel), Windows, and Linux. Both terminal TUI and desktop GUI interfaces available.",
           },
         },
       ],

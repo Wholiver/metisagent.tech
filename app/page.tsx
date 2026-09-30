@@ -27,12 +27,12 @@ const copyContent = {
     homeLabel: "Metis home",
     navDocs: "Docs",
     navCompare: "Compare",
-    heroLine: "Elevate your model's coding performance.",
-    heroEmphasis: "Turn LLM generation into reliable engineering.",
-    heroCopy: "The open-source autonomous coding harness built for peak model performance.",
-    seoSubtitle: "Open-Source Coding Agent Harness Built to Maximize LLM Performance",
+    heroLine: "Same model, verified harness lift for coding agents",
+    heroEmphasis: "",
+    heroCopy: "MIT · Multi-model · Terminal & Desktop · Terminal-Bench ~82% same model (vs OpenCode ~67%)",
+    seoSubtitle: "Open-Source Coding Agent with Verified Same-Model Harness Lift",
     seoDescription:
-      "Metis is an open-source coding agent harness engineered to elevate LLM coding performance to production grade. Features closed-loop test verification, automated self-healing, cross-session memory, and multi-agent coordination for Claude, DeepSeek, and OpenAI models.",
+      "Metis is an open-source coding agent harness with verified same-model performance lift. Terminal-Bench ~82% vs OpenCode ~67%. Multi-model support, terminal-first design for Claude Code and OpenCode switchers.",
     download: "Download Metis",
     downloadForMac: "Download for macOS",
     downloadForWin: "Download for Windows",
@@ -45,18 +45,18 @@ const copyContent = {
     copyCommand: "Copy install command",
     cliTag: "or install via CLI",
     footerCredit: "MIT License · Built by Wholiver",
-    footerTagline: "Elevate LLM Performance · Closed-Loop Verification · Persistent Memory",
+    footerTagline: "Verified Harness Lift · Multi-Model · Terminal & Desktop",
   },
   zh: {
     homeLabel: "Metis 首页",
     navDocs: "文档",
     navCompare: "竞品对比",
-    heroLine: "全面提升大模型编程性能，",
-    heroEmphasis: "让 AI 代码从生成走向自主交付。",
-    heroCopy: "全球领先的开源 Coding Agent Harness · 闭环测试验证 · 自动异常自愈 · 跨会话记忆",
-    seoSubtitle: "专为全面提升大模型编程性能打造的开源 Coding Agent Harness",
+    heroLine: "同模型下，harness 可验证拉高 coding agent 表现",
+    heroEmphasis: "",
+    heroCopy: "MIT · 多模型 · 终端/桌面 · Terminal-Bench 同模约 82%（vs OpenCode ~67%）",
+    seoSubtitle: "可验证同模表现提升的开源 Coding Agent Harness",
     seoDescription:
-      "Metis 专为全面提升大模型编程性能打造。通过自动化测试闭环、语法与逻辑异常自愈、跨会话经验记忆以及多智能体分工，让 Claude、DeepSeek、GPT 等模型告别代码幻觉，稳定交付真实工程代码。",
+      "Metis 是开源 coding agent harness，同模型下可验证拉高表现。Terminal-Bench 同模约 82%（vs OpenCode ~67%）。多模型支持，终端优先设计，适合从 Claude Code / OpenCode 切换的用户。",
     download: "下载 Metis",
     downloadForMac: "下载 macOS 版",
     downloadForWin: "下载 Windows 版",
@@ -69,7 +69,7 @@ const copyContent = {
     copyCommand: "复制安装命令",
     cliTag: "或通过终端直接安装",
     footerCredit: "MIT 开源 · Wholiver 构建",
-    footerTagline: "提升模型性能 · 闭环验证 · 经验记忆 · 智能自愈",
+    footerTagline: "可验证 Harness 提升 · 多模型 · 终端/桌面",
   },
 } as const;
 
@@ -211,7 +211,7 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
 
           <div className="hero-slogan">
             <p className="slogan-primary">
-              <span>{copy.heroLine}</span> <em>{copy.heroEmphasis}</em>
+              <span>{copy.heroLine}</span>{copy.heroEmphasis && <> <em>{copy.heroEmphasis}</em></>}
             </p>
             <p className="slogan-secondary">{copy.heroCopy}</p>
           </div>
