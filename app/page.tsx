@@ -272,41 +272,43 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
                 </button>
               </div>
 
-              {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div className="download-menu" role="menu">
-                  <div className="menu-header">{copy.otherPlatforms}</div>
-                  {downloadOptions.map((opt) => (
-                    <a
-                      key={opt.id}
-                      href={opt.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="menu-item"
-                      role="menuitem"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      <div className="item-info">
-                        <span className="item-platform">{opt.platform}</span>
-                        <span className="item-arch">{opt.arch}</span>
-                      </div>
-                      <span className="item-badge">{opt.badge}</span>
-                    </a>
-                  ))}
-                  <div className="menu-divider" />
+              {/* Keep asset links in the DOM so crawlers / static HTML see direct download URLs. */}
+              <div
+                className="download-menu"
+                role="menu"
+                hidden={!dropdownOpen}
+              >
+                <div className="menu-header">{copy.otherPlatforms}</div>
+                {downloadOptions.map((opt) => (
                   <a
-                    href={GITHUB_RELEASES}
+                    key={opt.id}
+                    href={opt.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="menu-item menu-item-link"
+                    className="menu-item"
                     role="menuitem"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <span>{copy.viewAllReleases}</span>
-                    <span aria-hidden="true">↗</span>
+                    <div className="item-info">
+                      <span className="item-platform">{opt.platform}</span>
+                      <span className="item-arch">{opt.arch}</span>
+                    </div>
+                    <span className="item-badge">{opt.badge}</span>
                   </a>
-                </div>
-              )}
+                ))}
+                <div className="menu-divider" />
+                <a
+                  href={GITHUB_RELEASES}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="menu-item menu-item-link"
+                  role="menuitem"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <span>{copy.viewAllReleases}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
             </div>
 
             {/* GitHub Secondary Pill */}
