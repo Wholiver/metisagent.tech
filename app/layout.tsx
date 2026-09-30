@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { VERSION } from "./release";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metisagent.tech";
 
@@ -116,7 +117,7 @@ const jsonLd = {
       },
       description:
         "The open-source autonomous coding agent harness engineered to elevate LLM coding performance with closed-loop verification, automated self-healing, and persistent memory.",
-      softwareVersion: "1.3.2",
+      softwareVersion: VERSION,
       license: "https://opensource.org/licenses/MIT",
       downloadUrl: "https://github.com/Wholiver/metis/releases",
       screenshot: `${SITE_URL}/og.png`,
