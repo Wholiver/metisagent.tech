@@ -26,6 +26,24 @@ test("exports the bilingual Metis home page with deep SEO", async () => {
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /SoftwareApplication/);
   assert.match(html, /DeveloperApplication/);
+  assert.match(html, /"softwareVersion":"1\.3\.5"/);
+  // Latest GitHub Release desktop assets (direct download URLs)
+  assert.match(html, /v1\.3\.5/);
+  assert.match(
+    html,
+    /https:\/\/github\.com\/Wholiver\/metis\/releases\/download\/v1\.3\.5\/Metis-1\.3\.5-macos-arm64\.dmg/,
+  );
+  assert.match(
+    html,
+    /https:\/\/github\.com\/Wholiver\/metis\/releases\/download\/v1\.3\.5\/Metis-1\.3\.5-win-x64-setup\.exe/,
+  );
+  assert.match(
+    html,
+    /https:\/\/github\.com\/Wholiver\/metis\/releases\/download\/v1\.3\.5\/Metis-1\.3\.5-win-x64\.zip/,
+  );
+  assert.doesNotMatch(html, /windows-x64\.exe/);
+  assert.doesNotMatch(html, /Download for Linux/);
+  assert.doesNotMatch(html, /macos-intel|AppImage|\.AppImage/);
   // Verify cloud mascot logo is rendered inline, zero pixel mark
   assert.match(html, /viewBox="-128 -128 256 256"/);
   assert.doesNotMatch(html, /Metis pixel mark/);

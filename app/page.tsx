@@ -4,29 +4,15 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { MetisMascot } from "./metis-mascot";
 import { Language, LanguageSwitcher, useLanguage } from "./language-switcher";
-
-const VERSION = "1.3.2";
-const GITHUB_REPO = "https://github.com/Wholiver/metis";
-const GITHUB_RELEASES = `${GITHUB_REPO}/releases`;
-
-const downloadOptions = [
-  {
-    id: "mac-arm64",
-    platform: "macOS",
-    arch: "Apple Silicon (M1/M2/M3/M4)",
-    file: `Metis-${VERSION}-macos-arm64.dmg`,
-    url: `${GITHUB_RELEASES}/download/v${VERSION}/Metis-${VERSION}-macos-arm64.dmg`,
-    badge: "arm64",
-  },
-  {
-    id: "windows-x64",
-    platform: "Windows",
-    arch: "64-bit Installer",
-    file: `Metis-${VERSION}-windows-x64.exe`,
-    url: `${GITHUB_RELEASES}/latest`,
-    badge: "exe",
-  },
-];
+import {
+  VERSION,
+  GITHUB_REPO,
+  GITHUB_RELEASES,
+  NPM_PACKAGE_URL,
+  downloadOptions,
+  macArm64Download,
+  windowsSetupDownload,
+} from "./release";
 
 const installCommands = {
   npm: "npm i -g @wholiver_hu/metis",
@@ -50,7 +36,7 @@ const copyContent = {
     download: "Download Metis",
     downloadForMac: "Download for macOS",
     downloadForWin: "Download for Windows",
-    downloadForLinux: "Download for Linux",
+    installViaCli: "Install via CLI",
     otherPlatforms: "Other platforms & releases",
     viewAllReleases: "All releases on GitHub",
     githubCta: "GitHub",
@@ -74,7 +60,7 @@ const copyContent = {
     download: "下载 Metis",
     downloadForMac: "下载 macOS 版",
     downloadForWin: "下载 Windows 版",
-    downloadForLinux: "下载 Linux 版",
+    installViaCli: "通过 CLI 安装",
     otherPlatforms: "其它系统与历史版本",
     viewAllReleases: "在 GitHub 查看全部版本",
     githubCta: "GitHub",
@@ -139,20 +125,21 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
     if (detectedPlatform === "win") {
       return {
         label: copy.downloadForWin,
-        url: `${GITHUB_RELEASES}/latest`,
-        note: "64-bit EXE",
+        url: windowsSetupDownload.url,
+        note: "64-bit setup",
       };
     }
+    // No Linux desktop installer ships on GitHub Releases — point to npm/CLI.
     if (detectedPlatform === "linux") {
       return {
-        label: copy.downloadForLinux,
-        url: GITHUB_RELEASES,
-        note: "Releases",
+        label: copy.installViaCli,
+        url: NPM_PACKAGE_URL,
+        note: "npm / pnpm / bun",
       };
     }
     return {
       label: copy.downloadForMac,
-      url: downloadOptions[0].url,
+      url: macArm64Download.url,
       note: "Apple Silicon .dmg",
     };
   })();
@@ -285,41 +272,43 @@ export function HomeView({ initialLanguage = "en" }: { initialLanguage?: Languag
                 </button>
               </div>
 
-              {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div className="download-menu" role="menu">
-                  <div className="menu-header">{copy.otherPlatforms}</div>
-                  {downloadOptions.map((opt) => (
-                    <a
-                      key={opt.id}
-                      href={opt.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="menu-item"
-                      role="menuitem"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      <div className="item-info">
-                        <span className="item-platform">{opt.platform}</span>
-                        <span className="item-arch">{opt.arch}</span>
-                      </div>
-                      <span className="item-badge">{opt.badge}</span>
-                    </a>
-                  ))}
-                  <div className="menu-divider" />
+              {/* Keep asset links in the DOM so crawlers / static HTML see direct download URLs. */}
+              <div
+                className="download-menu"
+                role="menu"
+                hidden={!dropdownOpen}
+              >
+                <div className="menu-header">{copy.otherPlatforms}</div>
+                {downloadOptions.map((opt) => (
                   <a
-                    href={GITHUB_RELEASES}
+                    key={opt.id}
+                    href={opt.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="menu-item menu-item-link"
+                    className="menu-item"
                     role="menuitem"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <span>{copy.viewAllReleases}</span>
-                    <span aria-hidden="true">↗</span>
+                    <div className="item-info">
+                      <span className="item-platform">{opt.platform}</span>
+                      <span className="item-arch">{opt.arch}</span>
+                    </div>
+                    <span className="item-badge">{opt.badge}</span>
                   </a>
-                </div>
-              )}
+                ))}
+                <div className="menu-divider" />
+                <a
+                  href={GITHUB_RELEASES}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="menu-item menu-item-link"
+                  role="menuitem"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <span>{copy.viewAllReleases}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
             </div>
 
             {/* GitHub Secondary Pill */}
